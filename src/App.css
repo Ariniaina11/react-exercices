@@ -36,3 +36,13 @@
     transform: rotate(360deg);
   }
 }
+
+.my-button{
+  border-color: cadetblue;
+  border-style: solid;
+  padding: 10px;
+  font-family: sans-serif;
+  cursor: pointer;
+  letter-spacing: 1px;
+  font-size: 18px;
+}
