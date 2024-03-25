@@ -1,23 +1,22 @@
 import './App.css';
-import { useState } from 'react';
-
-function Button({onClick, count}){
-  return(
-    <button onClick={onClick}>You click me {count} time(s)</button>
-  )
-}
+import { useEffect, useState } from 'react';
 
 function App() {
   const [count, setCount] = useState(0)
+  const [step, setStep] = useState(1)
 
-  function handleClick(){
-    setCount(count + 1)
-  }
+  useEffect(() => {
+
+  }, [])
 
   return (
-    <div className="bg-amber-700">
-      <Button onClick={handleClick} count={count} />
-      <Button onClick={handleClick} count={count} />
+    <div className="container">
+      <h1 className="text-center text-blue-100">Counter</h1>
+
+      <input type='number' value={count} onChange={e => setStep(Number(e.target.value))}/>
+
+      <button onClick={() => setCount(count + step)}>Increment</button>
+      <button onClick={() => setCount(count - step)}>Decrement</button>
     </div>
   );
 }
