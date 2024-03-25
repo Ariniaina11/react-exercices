@@ -2,8 +2,8 @@ import './App.css';
 import { useEffect, useState } from 'react';
 
 function App() {
-  const countOnStorage = localStorage.getItem('count') || 0
-  const [count, setCount] = useState(countOnStorage)
+  const getCountValue = () => Number(localStorage.getItem('count') || 0)
+  const [count, setCount] = useState(getCountValue)
   const [step, setStep] = useState(1)
 
   // Incrémentation
