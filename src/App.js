@@ -10,19 +10,18 @@ function App() {
   function increment() {
     const newCount = Number(count + step)
     setCount(newCount)
-    localStorage.setItem('count', newCount)
   }
 
   // Décrementation
   function decrement() {
     const newCount = Number(count - step)
     setCount(newCount)
-    localStorage.setItem('count', newCount)
+    
   }
 
   useEffect(() => {
-
-  }, [])
+    localStorage.setItem('count', count)
+  }, [count])
 
   return (
     <div className="container">
