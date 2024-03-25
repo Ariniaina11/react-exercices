@@ -2,8 +2,23 @@ import './App.css';
 import { useEffect, useState } from 'react';
 
 function App() {
-  const [count, setCount] = useState(0)
+  const countOnStorage = localStorage.getItem('count') || 0
+  const [count, setCount] = useState(countOnStorage)
   const [step, setStep] = useState(1)
+
+  // Incrémentation
+  function increment() {
+    const newCount = Number(count + step)
+    setCount(newCount)
+    localStorage.setItem('count', newCount)
+  }
+
+  // Décrementation
+  function decrement() {
+    const newCount = Number(count - step)
+    setCount(newCount)
+    localStorage.setItem('count', newCount)
+  }
 
   useEffect(() => {
 
@@ -15,8 +30,8 @@ function App() {
 
       <input type='number' value={count} onChange={e => setStep(Number(e.target.value))}/>
 
-      <button onClick={() => setCount(count + step)}>Increment</button>
-      <button onClick={() => setCount(count - step)}>Decrement</button>
+      <button onClick={increment}>Increment</button>
+      <button onClick={decrement}>Decrement</button>
     </div>
   );
 }
