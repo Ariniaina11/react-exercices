@@ -3,42 +3,39 @@ import { useEffect, useState } from 'react';
 
 function useLocalStorageState(initialValue, key){
   const [state, setState] = useState(initialValue)
-
-  useEffect(() => {
-    localStorage.setItem(key, state)
+  
+  useEffect(() => {    
+    localStorage.setItem(key, JSON.stringify(state))
   }, [key, state])
 
   return [state, setState]
 }
 
 function App() {
-  const getCountValue = () => Number(localStorage.getItem('count') || 0)
-  const [count, setCount] = useLocalStorageState(getCountValue, 'count')
-  const [step, setStep] = useState(1)
+  const getNeedValue = () => JSON.parse(localStorage.getItem('needs') || `"{None}"`);
+  const [need, setNeed] = useLocalStorageState(getNeedValue, 'needs')
 
-  // Incrémentation
-  function increment() {
-    const newCount = Number(count + step)
-    setCount(newCount)
+  function getNeedHandle(){
+    // Add here you need (String, Number, Array, Object, Boolean)
+    const yourNeed = {
+      pc : 'MacBook Pro',
+      girlFriend : {
+        color : 'white',
+        height : 1.60,
+        boyFriend : false
+      },
+      health: true
+    }
+    setNeed(yourNeed)
   }
-
-  // Décrementation
-  function decrement() {
-    const newCount = Number(count - step)
-    setCount(newCount)
-    
-  }
-
- 
 
   return (
-    <div className="container">
-      <h1 className="text-blue-600">Counter : {count}</h1>
-
-      <input type='number' value={step} onChange={e => setStep(Number(e.target.value))}/>
-
-      <button onClick={increment}>Increment</button>
-      <button onClick={decrement}>Decrement</button>
+    <div className="text-center my-auto mx-auto">
+      <h1 className="text-7xl text-gray-500 font-mono">Tell me your needs !</h1>
+      <div className='mt-10'>
+        <button type='button' className='px-7 bg-green-600 text-white text-4xl' onClick={getNeedHandle}>GET</button>
+      </div>
+      <span className='text-gray-600'>{JSON.stringify(need)}</span>
     </div>
   );
 }
